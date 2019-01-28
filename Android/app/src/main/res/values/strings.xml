@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">AustrianCardGames</string>
+    <string name="app_title">Austrian Games</string>
+    <string name="card_deck">Card deck</string>
+    <string name="dice_cup">Dice cup</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
 </resources>
