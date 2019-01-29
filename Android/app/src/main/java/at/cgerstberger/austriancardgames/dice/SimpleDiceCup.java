@@ -22,11 +22,12 @@ public class SimpleDiceCup extends FlowLayout {
         dices.remove(d);
     }
 
-    public void rollTheDices(){
+    public int rollTheDices(){
         int eyesNumber = 0;
         for(Dice d : dices){
             eyesNumber += d.rollTheDice();
         }
+        return eyesNumber;
     }
 
     public List<Dice> getDices(){

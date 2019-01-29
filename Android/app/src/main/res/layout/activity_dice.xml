@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".dice.DiceActivity">
+    tools:context=".dice.DiceActivity"
+    android:background="#D2B48C">
 
     <com.nex3z.flowlayout.FlowLayout
         android:id="@+id/flowLayoutDices"
@@ -26,24 +27,35 @@
         android:id="@+id/btnAddDice"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginTop="8dp"
         android:text="@string/plus"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnRemoveDice"
         app:layout_constraintTop_toBottomOf="@+id/flowLayoutDices" />
 
     <Button
         android:id="@+id/btnRemoveDice"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
         android:text="@string/minus"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/btnAddDice"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/flowLayoutDices" />
+
+    <Button
+        android:id="@+id/btnRollTheDice"
+        android:layout_width="119dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/roll_the_dice"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/btnAddDice"
         app:layout_constraintTop_toBottomOf="@+id/flowLayoutDices" />
 
 </android.support.constraint.ConstraintLayout>

@@ -13,27 +13,24 @@ import at.cgerstberger.austriancardgames.R;
 public class DiceActivity extends AppCompatActivity {
 
     private SimpleDiceCup simpleDiceCup;
+    private FlowLayout flowLayoutDices;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dice);
 
+        flowLayoutDices = findViewById(R.id.flowLayoutDices);
+        simpleDiceCup = new SimpleDiceCup(this);
         initDices();
-
-        final FlowLayout flowLayoutDices = findViewById(R.id.flowLayoutDices);
-        for(Dice d : simpleDiceCup.getDices()){
-            flowLayoutDices.addView(d);
-        }
 
         Button btnAddDice = findViewById(R.id.btnAddDice);
         btnAddDice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(simpleDiceCup.getDices().size() < 6){
-                    Dice d = new Dice(getApplicationContext());
-                    simpleDiceCup.attach(d);
-                    flowLayoutDices.addView(d);
+                    final Dice d = new Dice(getApplicationContext());
+                    addDice(d);
                 }
             }
         });
@@ -43,21 +40,41 @@ public class DiceActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(simpleDiceCup.getDices().size() > 1){
                     Dice d = simpleDiceCup.getDices().get(simpleDiceCup.getDices().size()-1);
-                    simpleDiceCup.detach(d);
-                    flowLayoutDices.removeView(d);
+                    removeDice(d);
                 }
+            }
+        });
+        Button btnRollTheDice = findViewById(R.id.btnRollTheDice);
+        btnRollTheDice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                simpleDiceCup.rollTheDices();
             }
         });
     }
 
     private void initDices() {
         simpleDiceCup = new SimpleDiceCup(this);
-        simpleDiceCup.attach(new Dice(this));
-        simpleDiceCup.attach(new Dice(this));
-        simpleDiceCup.attach(new Dice(this));
-        simpleDiceCup.attach(new Dice(this));
-        simpleDiceCup.attach(new Dice(this));
-        simpleDiceCup.attach(new Dice(this));
+        for(int i = 0; i < 6; i ++){
+            final Dice d = new Dice(this);
+            addDice(d);
+        }
     }
 
+    private void addDice(final Dice d){
+        d.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                removeDice(d);
+                return true;
+            }
+        });
+        simpleDiceCup.attach(d);
+        flowLayoutDices.addView(d);
+    }
+
+    private void removeDice(Dice d){
+        simpleDiceCup.detach(d);
+        flowLayoutDices.removeView(d);
+    }
 }
